@@ -1,60 +1,52 @@
-import { useState } from "react";
+import { Link, NavLink } from "react-router";
 
 export default function Navbar() {
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  // const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   return (
     <>
-      <div className="   w-screen border border-gray-300 text-gray-700">
-        <div className="container mx-auto flex justify-between items-center gap-10 py-3 px-3">
-          <a href="/" className="flex justify-between items-center gap-3">
+      <div className="lg:w-98/100 mx-auto  text-gray-200 shadow-2xl rounded-b-3xl mb-10 bg-white/50 fixed z-99  backdrop-blur-md ">
+        <div className="mx-auto flex justify-between items-center gap-10 lg:py-5 py-3 px-5">
+          <Link
+            href="/"
+            className="flex justify-between items-center gap-3 lg:ps-3"
+          >
             <img
-              src="./imgs/logo gray.png"
-              className="lg:h-13 h-8"
+              src="./imgs/logo white.png"
+              className="h-8"
               alt="Let's Play logo"
             />
-            <h2 className="lg:text-4xl text-2xl font-extrabold italic">
+            <h2 className="lg:text-3xl text-2xl text-white font-extrabold italic">
               Let's Play
             </h2>
-          </a>
-          <div className="lg:text-3xl text-xl">
-            <span
-              className="lg:hidden cursor-pointer"
-              onClick={() => {
-                isNavbarOpen ? setIsNavbarOpen(false) : setIsNavbarOpen(true);
-              }}
-            >
-              {isNavbarOpen ? "❌" : "🍔"}
-            </span>
-          </div>
-          <div className=" gap-5 text-xl hidden lg:flex">
-            <a
-              className="hover:bg-gray-100 px-3 py-1 rounded-xl transition"
-              href="/"
+          </Link>
+
+          <div className="gap-3 text-xl hidden lg:flex lg:pe-3">
+            <NavLink
+              className="hover:text-shadow-md  rounded-xl transition"
+              to="/events"
             >
               Eventi
-            </a>
-            <a
-              className="hover:bg-gray-100 px-3 py-1 rounded-xl transition"
-              href="/"
+            </NavLink>
+            <NavLink
+              className="hover:hover:text-shadow-md  rounded-xl transition"
+              to="/contacts"
             >
               Contatti
-            </a>
+            </NavLink>
           </div>
         </div>
-      </div>
-      {/* dropdown menu */}
-      <div
-        className={`bg-gray-700  text-white flex flex-col absolute w-full  ${
-          isNavbarOpen ? "block" : "hidden"
-        }`}
-      >
-        <a className="px-3 py-4" href="/events">
-          Eventi
-        </a>
-        <a className="px-3 py-4" href="/events">
-          Contatti
-        </a>
+        <div className="py-3 ps-3 lg:hidden">
+          <NavLink className="px-3 py-4" to="/events">
+            Eventi
+          </NavLink>
+          <NavLink className="px-3 py-4" to="/contacts">
+            Contatti
+          </NavLink>
+          <NavLink className="px-3 py-4" to="/events">
+            Qualcosa
+          </NavLink>
+        </div>
       </div>
     </>
   );

@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* navlink style */
+a.active {
+  color: white;
+}
+a.transitioning {
+  view-transition-name: my-transition;
+}
+
 * {
   /* border: 1px dashed black; */
 }
