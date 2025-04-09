@@ -1,14 +1,12 @@
 import { Link, NavLink } from "react-router";
 
 export default function Navbar() {
-  // const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-
   return (
     <>
-      <div className="lg:w-98/100 mx-auto  text-gray-200 shadow-2xl rounded-b-3xl mb-10 bg-white/50 fixed z-99  backdrop-blur-md ">
+      <div className="md:w-98/100 w-full mx-auto  text-gray-200 shadow-2xl rounded-b-3xl mb-10 bg-white/50 fixed z-99  backdrop-blur-md ">
         <div className="mx-auto flex justify-between items-center gap-10 lg:py-5 py-3 px-5">
           <Link
-            href="/"
+            to="/"
             className="flex justify-between items-center gap-3 lg:ps-3"
           >
             <img

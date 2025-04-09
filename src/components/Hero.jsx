@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 
 export default function Hero() {
   return (
-    <section className="flex justify-between items-center bg-slate-800/60  p-10 rounded-2xl backdrop-blur-md">
+    <section className="flex justify-between items-center   p-10 rounded-2xl bg-slate-800/60 backdrop-blur-md">
       <div className="w-6/10 flex flex-col justify-between items-center ">
         <div className="flex flex-col items-baseline gap-5">
           <h1 className="font-bold text-8xl">Let's Play</h1>
