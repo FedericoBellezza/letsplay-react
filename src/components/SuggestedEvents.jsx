@@ -1,87 +1,33 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router";
+import axios from "axios";
+import EventCard from "./EventCard";
+import { useEffect, useState } from "react";
 
 export default function SuggestedEvents() {
+  const [events, setEvents] = useState([]);
+  async function get4Events() {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/events/limit4"
+      );
+      console.log("risposta: " + response);
+      console.log("dati:", response.data);
+      setEvents(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    get4Events();
+  }, []);
+
   return (
-    <section className="flex flex-col justify-between items-center bg-slate-800/60 backdrop-blur-md p-10 rounded-2xl gap-10">
+    <section className="flex flex-col justify-between items-center bg-slate-800/60 backdrop-blur-md p-5 lg:p-10 rounded-2xl gap-10">
       <h2 className="font-bold text-3xl">I più popolari</h2>
-      <div className="flex gap-5">
-        <Link
-          className={
-            "w-1/4 pb-0 hover:scale-102 transition cursor-pointer grayscale hover:grayscale-0"
-          }
-          href=""
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img
-                className="rounded-xl aspect-square object-cover"
-                src="./imgs/heroImage.png"
-                alt=""
-              />
-            </CardContent>
-          </Card>
-        </Link>
-        <Link
-          className={
-            "w-1/4 pb-0 hover:scale-102 transition cursor-pointer grayscale hover:grayscale-0"
-          }
-          href=""
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img
-                className="rounded-xl aspect-square object-cover"
-                src="./imgs/heroImage.png"
-                alt=""
-              />
-            </CardContent>
-          </Card>
-        </Link>
-        <Link
-          className={
-            "w-1/4 pb-0 hover:scale-102 transition cursor-pointer grayscale hover:grayscale-0"
-          }
-          href=""
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img
-                className="rounded-xl aspect-square object-cover"
-                src="./imgs/heroImage.png"
-                alt=""
-              />
-            </CardContent>
-          </Card>
-        </Link>
-        <Link
-          className={
-            "w-1/4 pb-0 hover:scale-102 transition cursor-pointer grayscale hover:grayscale-0"
-          }
-          href=""
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img
-                className="rounded-xl aspect-square object-cover"
-                src="./imgs/heroImage.png"
-                alt=""
-              />
-            </CardContent>
-          </Card>
-        </Link>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {events &&
+          events.map((event) => <EventCard key={event.id} event={event} />)}
       </div>
     </section>
   );

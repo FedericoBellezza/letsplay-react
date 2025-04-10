@@ -3,23 +3,18 @@ import { Link, NavLink } from "react-router";
 export default function Navbar() {
   return (
     <>
-      <div className="md:w-98/100 w-full mx-auto  text-gray-200 shadow-2xl rounded-b-3xl mb-10 bg-white/50 fixed z-99  backdrop-blur-md ">
+      <div className="md:w-98/100 w-full mx-auto  text-gray-200 shadow-2xl rounded-b-3xl mb-10 bg-white/40 fixed z-99  backdrop-blur-sm ">
         <div className="mx-auto flex justify-between items-center gap-10 lg:py-5 py-3 px-5">
           <Link
             to="/"
             className="flex justify-between items-center gap-3 lg:ps-3"
           >
-            <img
-              src="./imgs/logo white.png"
-              className="h-8"
-              alt="Let's Play logo"
-            />
-            <h2 className="lg:text-3xl text-2xl text-white font-extrabold italic">
+            <h2 className="lg:text-3xl text-2xl text-white font-extrabold italic text-shadow-gray-700 text-shadow-lg">
               Let's Play
             </h2>
           </Link>
 
-          <div className="gap-3 text-xl hidden lg:flex lg:pe-3">
+          <div className="gap-5 text-xl hidden lg:flex lg:pe-3">
             <NavLink
               className="hover:text-shadow-md  rounded-xl transition"
               to="/events"
@@ -27,10 +22,16 @@ export default function Navbar() {
               Eventi
             </NavLink>
             <NavLink
-              className="hover:hover:text-shadow-md  rounded-xl transition"
+              className="hover:text-shadow-md  rounded-xl transition"
               to="/contacts"
             >
               Contatti
+            </NavLink>
+            <NavLink
+              className="hover:text-shadow-md  rounded-xl transition"
+              to="/bests"
+            >
+              I milgiori
             </NavLink>
           </div>
         </div>
@@ -41,8 +42,8 @@ export default function Navbar() {
           <NavLink className="px-3 py-4" to="/contacts">
             Contatti
           </NavLink>
-          <NavLink className="px-3 py-4" to="/events">
-            Qualcosa
+          <NavLink className="px-3 py-4" to="/bests">
+            I migliori
           </NavLink>
         </div>
       </div>

@@ -1,12 +1,4 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -18,6 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Input } from "@/components/ui/input";
+import EventCard from "@/components/EventCard";
 
 export default function EventsPage() {
   // states
@@ -39,10 +32,6 @@ export default function EventsPage() {
       console.error(error);
     }
   }
-  function formatDate(date) {
-    const [year, month, day] = date.split("-");
-    return `${day}/${month}/${year.slice(2)}`;
-  }
   function getCategories(events) {
     events.forEach((event) => {
       if (!categories.includes(event.category.name)) {
@@ -52,7 +41,6 @@ export default function EventsPage() {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     getEvents();
   }, []);
 
@@ -95,7 +83,7 @@ export default function EventsPage() {
         />
       </div>
 
-      <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-col-1  gap-5 px-20 md:px-5">
+      <div className="grid  lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 grid-col-1  gap-5 lg:px-20 px-5  grid-auto-rows-1">
         {events &&
           events.map(
             (event) =>
@@ -105,52 +93,9 @@ export default function EventsPage() {
               event.address
                 .toLowerCase()
                 .includes(searchAddress.toLowerCase()) && (
-                <Link
-                  key={event.id}
-                  to={`/events/${event.id}`}
-                  className="hover:scale-102 transition xl:grayscale hover:grayscale-0 "
-                >
-                  <Card className={"bg-slate-800/60 backdrop-blur-md border-0"}>
-                    <CardHeader>
-                      <CardTitle
-                        className={
-                          "text-2xl text-white flex justify-between items-baseline"
-                        }
-                      >
-                        {event.name}
-                        <span className="italic font-normal text-sm">
-                          {event.price == 0 ? "Gratuito" : "€ " + event.price}
-                        </span>
-                      </CardTitle>
-                      <CardDescription
-                        className={
-                          "text-lg text-gray-200 flex justify-between items-baseline"
-                        }
-                      >
-                        <span>{event.category.name}</span>
-                      </CardDescription>
-                      <CardDescription
-                        className={
-                          "text-gray-200 italic text-sm flex justify-between"
-                        }
-                      >
-                        <div>
-                          <span>{formatDate(event.startDate)} - </span>
-                          <span>{formatDate(event.endDate)}</span>
-                        </div>
-                        <div className="text-end">
-                          <span>{event.address}</span>
-                        </div>
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <img
-                        src={event.mainImage || "./imgs/heroImage.png"}
-                        className="w-full rounded-2xl aspect-square bg-white"
-                      />
-                    </CardContent>
-                  </Card>
-                </Link>
+                <div className="flex flex-col h-full">
+                  <EventCard key={event.id} event={event} />
+                </div>
               )
           )}
       </div>
