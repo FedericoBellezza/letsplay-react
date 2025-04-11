@@ -5,10 +5,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import { Input } from "@/components/ui/input";
 import EventCard from "@/components/EventCard";
 
@@ -38,6 +45,23 @@ export default function EventsPage() {
         categories.push(event.category.name);
       }
     });
+  }
+  async function orderBy(order) {
+    if (order == null) {
+      getEvents();
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/events/sort/" + order
+      );
+      console.log("risposta: " + response);
+      console.log("dati:", response.data);
+      setEvents(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
@@ -81,6 +105,50 @@ export default function EventsPage() {
           type={"number"}
           min={0}
         />
+        <DropdownMenu>
+          <DropdownMenuTrigger className="w-2/3 md:w-[200px] border py-1 rounded-md bg-amber-50/30">
+            Ordina per
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Ordina per</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => {
+                orderBy(null);
+              }}
+            >
+              Ripristina
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                orderBy("name");
+              }}
+            >
+              Nome
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                orderBy("startDate");
+              }}
+            >
+              Data di inizio
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                orderBy("price");
+              }}
+            >
+              Prezzo
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                orderBy("category.name");
+              }}
+            >
+              Categoria
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       <div className="grid  lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 grid-col-1  gap-5 lg:px-20 px-5  grid-auto-rows-1">

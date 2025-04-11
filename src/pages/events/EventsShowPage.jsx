@@ -53,7 +53,7 @@ export default function EventsShowPage() {
                 </div>
               ))}
             </div>
-            <ul className="text-lg">
+            <ul className="lg:text-xl text-md">
               <li className="list-disc list-inside">
                 <span className="font-bold">Inizio evento: </span>
                 <span>{formatDate(event.startDate)}</span>
