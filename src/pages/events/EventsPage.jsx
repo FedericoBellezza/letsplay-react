@@ -18,6 +18,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import EventCard from "@/components/EventCard";
+import { motion } from "framer-motion";
 
 export default function EventsPage() {
   // states
@@ -31,8 +32,6 @@ export default function EventsPage() {
   async function getEvents() {
     try {
       const response = await axios.get("http://localhost:8080/api/events");
-      console.log("risposta: " + response);
-      console.log("dati:", response.data);
       setEvents(response.data);
       getCategories(response.data);
     } catch (error) {
@@ -65,6 +64,7 @@ export default function EventsPage() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getEvents();
   }, []);
 
@@ -99,7 +99,7 @@ export default function EventsPage() {
         {/* price input */}
         <Input
           onChange={(e) => setSearchMaxPrice(e.target.value)}
-          value={searchMaxPrice}
+          value={searchMaxPrice ? searchMaxPrice : ""}
           className={"w-2/3 md:w-[250px]"}
           placeholder="Inserisci un prezzo massimo"
           type={"number"}
@@ -151,19 +151,33 @@ export default function EventsPage() {
         </DropdownMenu>
       </div>
 
-      <div className="grid  lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 grid-col-1  gap-5 lg:px-20 px-5  grid-auto-rows-1">
+      <div className="grid lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 grid-col-1 gap-5 lg:px-20 px-5 grid-auto-rows-1">
         {events &&
           events.map(
-            (event) =>
+            (event, index) =>
               (searchCategory == null ||
                 event.category.name == searchCategory) &&
               (searchMaxPrice == null || event.price <= searchMaxPrice) &&
               event.address
                 .toLowerCase()
                 .includes(searchAddress.toLowerCase()) && (
-                <div className="flex flex-col h-full">
-                  <EventCard key={event.id} event={event} />
-                </div>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0,
+                    y: 200,
+                  }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{
+                    ease: "easeInOut",
+                    duration: 0.5,
+                    delay: index * 0.08,
+                  }}
+                  key={event.id}
+                  className="flex flex-col h-full shadow-2xl rounded-2xl"
+                >
+                  <EventCard index={index} event={event} />
+                </motion.div>
               )
           )}
       </div>

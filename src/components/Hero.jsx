@@ -10,7 +10,7 @@ export default function Hero() {
             Trova il tuo prossimo evento, ovunque tu sia.
           </h2>
           <NavLink to="/events">
-            <button className="bg-slate-600 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-xl transition cursor-pointer">
+            <button className="bg-slate-700 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl transition cursor-pointer">
               Inizia a cercare
             </button>
           </NavLink>
