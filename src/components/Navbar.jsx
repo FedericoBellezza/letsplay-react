@@ -9,7 +9,7 @@ export default function Navbar() {
             to="/"
             className="flex justify-between items-center gap-3 lg:ps-3"
           >
-            <h2 className="lg:text-3xl text-2xl text-white font-extrabold italic text-shadow-gray-700 text-shadow-lg">
+            <h2 className="lg:text-3xl text-2xl text-white font-extrabold italic ">
               Let's Play
             </h2>
           </Link>
@@ -27,12 +27,6 @@ export default function Navbar() {
             >
               Contatti
             </NavLink>
-            <NavLink
-              className="hover:text-shadow-md  rounded-xl transition"
-              to="/bests"
-            >
-              I milgiori
-            </NavLink>
           </div>
         </div>
         <div className="py-3 ps-3 lg:hidden">
@@ -41,9 +35,6 @@ export default function Navbar() {
           </NavLink>
           <NavLink className="px-3 py-4" to="/contacts">
             Contatti
-          </NavLink>
-          <NavLink className="px-3 py-4" to="/bests">
-            I migliori
           </NavLink>
         </div>
       </div>
