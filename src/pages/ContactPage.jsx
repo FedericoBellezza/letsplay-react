@@ -37,8 +37,8 @@ export default function ContactPage() {
   };
   return (
     <>
-      <div className="text-amber-50 lg:pt-25 min-h-screen">
-        <div className="container px-10 mx-auto flex flex-col xl:flex-row mt-25  justify-evenly items-center xl:items-start relative">
+      <div className="text-amber-50 lg:py-25 pt-20  p-5 lg:p-10 rounded-2xl bg-slate-800/60 backdrop-blur-md gap-5 mt-25 mx-2">
+        <div className="container px-10 mx-auto flex flex-col xl:flex-row   justify-evenly items-center xl:items-start relative">
           <h1 className="lg:text-7xl text-5xl text-center font-extrabold animate-entryfromleft mb-15">
             Contattaci
             <span
@@ -90,10 +90,10 @@ export default function ContactPage() {
             </form>
           </div>
         </div>
-        <p className="text-lg text-gray-400 lg:mt-50 mt-15  text-center">
-          Oppure scrivimi alla email: <strong>lets.play@gmail.com</strong>
-        </p>
       </div>
+      <p className="text-lg text-gray-400 lg:mt-50 mt-15  text-center">
+        Oppure scrivimi alla email: <strong>lets.play@gmail.com</strong>
+      </p>
     </>
   );
 }
